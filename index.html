@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LSA homepage preview: zip first (not live)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root { --blue:#0851ba; --navy:#13263f; --ink:#1f2a37; --muted:#5a6776; --line:#d9e2ec; --tint:#eef4fb; --note:#fff4c2; --note-ink:#5c4a00; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:17px/1.5 "Public Sans", system-ui, sans-serif; color:var(--ink); background:#fff; }
+  a { color:var(--blue); }
+  .banner { background:var(--navy); color:#fff; padding:12px 20px; font-size:14px; }
+  .banner strong { font-weight:600; }
+  .hero { background:linear-gradient(160deg,#063f8f,#0851ba 55%,#1a6fd4); color:#fff; padding:48px 20px 56px; }
+  .wrap { max-width:720px; margin:0 auto; }
+  h1 { font-family:"Source Serif 4", Georgia, serif; font-size:clamp(32px,5vw,46px); line-height:1.15; margin:0 0 8px; font-weight:650; }
+  .card { background:#fff; color:var(--ink); border-radius:16px; padding:20px; max-width:440px; margin-top:28px; box-shadow:0 16px 40px rgba(0,0,0,.18); }
+  label { display:block; font-weight:650; margin-bottom:8px; }
+  .row { display:flex; gap:8px; }
+  input { font:inherit; border:2px solid #c5d0dc; border-radius:10px; padding:12px 14px; width:100%; }
+  input:focus { outline:3px solid #ffb400; border-color:var(--blue); }
+  button, .call { font:inherit; font-weight:650; border:0; border-radius:10px; background:var(--blue); color:#fff; padding:12px 16px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; }
+  button.grow { white-space:nowrap; }
+  .help { margin:8px 0 0; font-size:13px; color:#374151; }
+  .badges { display:flex; flex-wrap:wrap; gap:14px; margin-top:22px; font-size:14px; color:#dbeafe; }
+  .actions { display:flex; flex-wrap:wrap; gap:16px; align-items:center; margin-top:18px; font-size:15px; }
+  .ghost { color:#fff; border:1.5px solid rgba(255,255,255,.7); background:transparent; border-radius:10px; padding:10px 14px; text-decoration:none; font-weight:600; }
+  .quiet { color:#dbeafe; }
+  .quiet a { color:#fff; }
+  section { padding:36px 20px; }
+  section.alt { background:var(--tint); }
+  h2 { font-family:"Source Serif 4", Georgia, serif; font-size:28px; margin:0 0 8px; }
+  .note { background:var(--note); color:var(--note-ink); border-radius:10px; padding:12px 14px; font-size:14px; margin-top:14px; }
+  form.stack { display:grid; gap:12px; max-width:420px; }
+  .hidden { display:none; }
+  .err { color:#a32121; font-size:13px; margin-top:6px; }
+  ul { margin:8px 0 0; padding-left:18px; }
+  li { margin:6px 0; }
+  footer { padding:24px 20px 40px; color:var(--muted); font-size:14px; }
+</style>
+</head>
+<body>
+  <div class="banner"><strong>Preview for Randy.</strong> This is not the live site. Nothing here calls anyone, sends a lead, or changes localsenioradvisor.com.</div>
+  <header class="hero">
+    <div class="wrap">
+      <h1>Find the right senior living for Mom or Dad. A local advisor helps you for free.</h1>
+      <div class="card" id="zip-card">
+        <form id="zip-form">
+          <label for="zip">Talk to a local advisor</label>
+          <div class="row">
+            <input id="zip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="Enter your zip code" required>
+            <button class="grow" type="submit">Get Started</button>
+          </div>
+          <p class="help">We'll connect you with an advisor who covers your area.</p>
+          <p class="err hidden" id="zip-err">Enter a 5 digit zip code.</p>
+        </form>
+        <div id="call-result" class="hidden">
+          <p class="help" style="margin-top:0">Your local advisor</p>
+          <a class="call" href="tel:+13852002175">Call (385) 200-2175</a>
+          <p class="note">In this preview every zip reaches the Utah line. Matching a zip to a specific advisor is not built yet. Try another zip resets below.</p>
+          <p><button type="button" id="reset" style="background:#eef4fb;color:#13263f">Try another zip</button></p>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="ghost" href="#callback">Get a call back</a>
+        <p class="quiet">Or <a href="#search-note">search communities by city or zip</a></p>
+      </div>
+      <div class="badges"><span>Free for families</span><span>No pressure</span><span>Real people in your area</span></div>
+    </div>
+  </header>
+  <section class="alt" id="callback">
+    <div class="wrap">
+      <h2>Get a call back</h2>
+      <p>Name, phone, and zip. The advisor can ask the rest on the call.</p>
+      <form class="stack" id="callback-form">
+        <div><label for="name">Your name</label><input id="name" required></div>
+        <div><label for="phone">Phone</label><input id="phone" type="tel" required></div>
+        <div><label for="cb-zip">Zip code</label><input id="cb-zip" inputmode="numeric" maxlength="5" required></div>
+        <button type="submit">Request call back</button>
+      </form>
+      <div id="thanks" class="hidden">
+        <h2>Thank you</h2>
+        <p>On the live site this would ask an advisor to call. This preview did not send anything.</p>
+      </div>
+      <p class="note" id="search-note">Search leaves the top of the page. The big panel for care type, zip, and radius is not a button next to Call. A quiet link would go to the community search that already exists.</p>
+    </div>
+  </section>
+  <section>
+    <div class="wrap">
+      <h2>What else this experiment changes</h2>
+      <ul>
+        <li>The homepage no longer leads with Search Communities, Find Local Advisor, and Call as three equal buttons.</li>
+        <li>The "Closest match" label comes off advisor cards until matching is real.</li>
+        <li>Test profiles stay off the public advisor lists.</li>
+        <li>Ogden stays first in the city list.</li>
+        <li>The trust line no longer says advisors have visited every community.</li>
+      </ul>
+      <p class="note">This matches the unmerged experiment, not the site families see today. It is not approved to go live.</p>
+    </div>
+  </section>
+  <footer><div class="wrap">Local Senior Advisor homepage experiment. For review only.</div></footer>
+<script>
+  const zipForm = document.getElementById('zip-form');
+  const zipErr = document.getElementById('zip-err');
+  const callResult = document.getElementById('call-result');
+  zipForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const zip = document.getElementById('zip').value.trim();
+    if (!/^\d{5}$/.test(zip)) { zipErr.classList.remove('hidden'); return; }
+    zipErr.classList.add('hidden');
+    zipForm.classList.add('hidden');
+    callResult.classList.remove('hidden');
+  });
+  document.getElementById('reset').addEventListener('click', () => {
+    document.getElementById('zip').value = '';
+    callResult.classList.add('hidden');
+    zipForm.classList.remove('hidden');
+  });
+  document.getElementById('callback-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    e.target.classList.add('hidden');
+    document.getElementById('thanks').classList.remove('hidden');
+  });
+</script>
+</body>
+</html>
