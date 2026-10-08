@@ -509,6 +509,8 @@ address { margin: 8px 0 0; font-style: normal; font-size: 14px; line-height: 1.6
   .brand .short { display: inline; }
   .hero-inner { padding: 48px 16px; }
   .zip-row { flex-direction: column; }
+  .zip-row input { width: 100%; height: 48px; min-height: 48px; }
+  .zip-row .btn-primary { width: 100%; height: 48px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .sticky-call-wrapper.visible { display: block; }
   .zip-card { padding: 20px; }
@@ -705,42 +707,88 @@ html, body { overflow-x: hidden; max-width: 100%; }
   width: 100%; height: 48px; padding: 0 14px; border-radius: 8px; border: 2px solid var(--color-gray-200);
 }
 .carousel { position: relative; }
-.carousel-viewport { overflow: hidden; }
+.carousel-toolbar {
+  display: none;
+  justify-content: flex-end;
+  gap: 8px;
+  margin: 0 0 10px;
+}
+.carousel-viewport { overflow: hidden; width: 100%; max-width: 100%; }
 .carousel-track {
-  display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory;
+  display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
   scroll-behavior: smooth; padding: 4px 2px 16px; -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  scrollbar-width: none; max-width: 100%;
 }
 .carousel-track::-webkit-scrollbar { display: none; }
-.carousel-card { flex: 0 0 calc((100% - 40px) / 3); scroll-snap-align: start; min-width: 0; }
-@media (max-width: 1024px) { .carousel-card { flex-basis: calc((100% - 20px) / 2); } }
-@media (max-width: 640px) { .carousel-card { flex-basis: 85%; } }
+.carousel-card {
+  flex: 0 0 calc((100% - 32px) / 3);
+  scroll-snap-align: start;
+  min-width: 0;
+  max-width: 100%;
+}
 .carousel-nav {
-  position: absolute; top: 40%; transform: translateY(-50%); z-index: 5;
+  z-index: 5;
   width: 40px; height: 40px; border-radius: 999px; border: 1px solid #e5e7eb;
   background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,.08); cursor: pointer;
   font-size: 24px; line-height: 1; color: #374151;
+  display: inline-flex; align-items: center; justify-content: center;
 }
-.carousel-prev { left: -8px; }
-.carousel-next { right: -8px; }
+.carousel-side-nav {
+  position: absolute; top: 42%; transform: translateY(-50%);
+}
+.carousel-side-nav.carousel-prev { left: -8px; }
+.carousel-side-nav.carousel-next { right: -8px; }
 .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 8px; }
 .carousel-dots button {
   width: 8px; height: 8px; border-radius: 999px; border: 0; background: #d1d5db; padding: 0; cursor: pointer;
 }
 .carousel-dots button.is-active { background: #2563eb; width: 20px; }
+@media (min-width: 1025px) {
+  [data-carousel] .carousel-track .carousel-card { flex: 0 0 calc((100% - 32px) / 3); }
+}
+@media (max-width: 1024px) and (min-width: 769px) {
+  [data-carousel] .carousel-track .carousel-card { flex: 0 0 calc((100% - 16px) / 2); }
+}
+@media (max-width: 768px) {
+  .carousel-toolbar { display: flex; }
+  .carousel-side-nav { display: none !important; }
+  [data-carousel] .carousel-track .carousel-card {
+    flex: 0 0 calc(100% - 2rem);
+    width: calc(100% - 2rem);
+    max-width: calc(100% - 2rem);
+  }
+  [data-carousel] .carousel-card .card-title {
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+  [data-carousel] .carousel-card .card-badges { flex-wrap: wrap; }
+  [data-carousel] .carousel-card .badge { white-space: nowrap; }
+  [data-carousel] .carousel-card .card-actions { flex-direction: column; }
+  [data-carousel] .carousel-card .btn-call,
+  [data-carousel] .carousel-card .btn-profile { width: 100%; min-height: 44px; font-size: 15px; justify-content: center; }
+}
 .lead-steps { display: flex; gap: 8px; justify-content: center; }
 .lead-dot { width: 8px; height: 8px; border-radius: 999px; background: #d1d5db; display: inline-block; }
 .lead-dot.is-active { background: #2563eb; width: 18px; }
 .text-us-bubble {
-  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  position: fixed; right: 12px; bottom: 12px; z-index: 50;
   min-width: 96px; height: 44px; padding: 0 16px;
   border-radius: 999px; border: 0;
   background: #0b5fff; color: #fff; font-weight: 700; font-size: 14px;
   box-shadow: 0 8px 24px rgba(11,95,255,.35); cursor: pointer;
 }
+@media (max-width: 768px) {
+  .text-us-bubble { right: 12px; bottom: 12px; z-index: 40; }
+  /* Keep bubble out of section headings: pin to viewport corner like live */
+  #local-communities { scroll-margin-top: 0; }
+}
 .text-us-bubble:focus { outline: 2px solid #93c5fd; outline-offset: 2px; }
 /* Ensure advisor photos fill card image area */
-.carousel-card.svelte-2o7eh .card-image img { width: 100%; height: 220px; object-fit: cover; object-position: center top; display: block; border-radius: 12px 12px 0 0; }
+.carousel-card.svelte-2o7eh .card-image { aspect-ratio: 4 / 3; height: auto; background: #e5e7eb; overflow: hidden; }
+.carousel-card.svelte-2o7eh .card-image a { display: block; height: 100%; }
+.carousel-card.svelte-2o7eh .card-image img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; border-radius: 0; }
 .carousel-card.svelte-2o7eh { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
 .carousel-card.svelte-2o7eh .card-body { padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
 .carousel-card.svelte-2o7eh .card-title { margin: 0; font-family: var(--font-display); font-size: 18px; font-weight: 700; color: #111827; }
@@ -914,7 +962,11 @@ html, body { overflow-x: hidden; max-width: 100%; }
         <p class="mt-3 text-gray-600 max-w-2xl mx-auto">Local communities close to you. What you need will vary based on level of care needed, price and availability.</p>
       </div>
       <div class="carousel svelte-6uf5v9" data-carousel="communities">
-        <button type="button" class="carousel-nav carousel-prev" aria-label="Previous communities">‹</button>
+        <div class="carousel-toolbar">
+          <button type="button" class="carousel-nav carousel-prev" aria-label="Previous communities">‹</button>
+          <button type="button" class="carousel-nav carousel-next" aria-label="Next communities">›</button>
+        </div>
+        <button type="button" class="carousel-nav carousel-side-nav carousel-prev" aria-label="Previous communities">‹</button>
         <div class="carousel-viewport">
           <div class="carousel-track" role="list"><a href="https://localsenioradvisor.com/communities/capitol-hill-senior-living" class="carousel-card svelte-6uf5v9" aria-roledescription="slide" aria-label="1 of 6: Capitol Hill Senior Living">
   <div class="card-image svelte-6uf5v9">
@@ -927,6 +979,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
   </div>
   <div class="card-body svelte-6uf5v9">
     <h3 class="card-title svelte-6uf5v9">Capitol Hill Senior Living</h3>
+    <div class="card-rating svelte-6uf5v9"><span class="text-amber-400">★</span> <span>4.7</span></div>
     
     <p class="card-location svelte-6uf5v9">Salt Lake City, UT</p>
     <div class="card-badges svelte-6uf5v9"><span class="badge badge-blue svelte-6uf5v9">Assisted Living</span></div>
@@ -1019,7 +1072,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
   </div>
 </a></div>
         </div>
-        <button type="button" class="carousel-nav carousel-next" aria-label="Next communities">›</button>
+        <button type="button" class="carousel-nav carousel-side-nav carousel-next" aria-label="Next communities">›</button>
         <div class="carousel-dots" role="tablist" aria-label="Community slides"></div>
       </div>
       <div class="mt-8 text-center">
@@ -1099,7 +1152,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
   <div class="relative z-10 mt-3 flex flex-wrap gap-2"><a href="https://localsenioradvisor.com/utah/bountiful/assisted-living" class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700 transition-colors hover:bg-primary-100 hover:text-primary-700">Assisted Living</a><a href="https://localsenioradvisor.com/utah/bountiful/memory-care" class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700 transition-colors hover:bg-primary-100 hover:text-primary-700">Memory Care</a><a href="https://localsenioradvisor.com/utah/bountiful/independent-living" class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700 transition-colors hover:bg-primary-100 hover:text-primary-700">Independent Living</a></div>
 </div></div>
       <div class="mt-8 text-center">
-        <a href="https://localsenioradvisor.com/utah" class="inline-flex items-center font-semibold text-primary-700 hover:text-primary-800">Browse all cities <span aria-hidden="true" class="ml-1">→</span></a>
+        <a href="https://localsenioradvisor.com/utah" class="inline-flex items-center font-semibold text-primary-600 hover:text-primary-700">Browse all cities <span aria-hidden="true" class="ml-1">→</span></a>
       </div>
     </div>
   </section>
@@ -1152,7 +1205,11 @@ html, body { overflow-x: hidden; max-width: 100%; }
         <p class="mt-3 text-gray-600 max-w-2xl mx-auto">Get free, personalized guidance from an advisor who knows the communities near you.</p>
       </div>
       <div class="carousel svelte-2o7eh" data-carousel="advisors">
-        <button type="button" class="carousel-nav carousel-prev" aria-label="Previous advisors">‹</button>
+        <div class="carousel-toolbar">
+          <button type="button" class="carousel-nav carousel-prev" aria-label="Previous advisors">‹</button>
+          <button type="button" class="carousel-nav carousel-next" aria-label="Next advisors">›</button>
+        </div>
+        <button type="button" class="carousel-nav carousel-side-nav carousel-prev" aria-label="Previous advisors">‹</button>
         <div class="carousel-viewport">
           <div class="carousel-track" role="list"><div class="carousel-card svelte-2o7eh" role="listitem" aria-roledescription="slide" aria-label="1 of 6: Randy Chipman">
   <div class="card-image svelte-2o7eh"><a href="https://localsenioradvisor.com/agents/randy-chipman"><img src="https://localsenioradvisor.com/uploads/small_IMG_5619_6e1f14352d.JPG" alt="Randy Chipman" loading="lazy" decoding="async" class="svelte-2o7eh" width="403" height="403"></a></div>
@@ -1233,7 +1290,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
   </div>
 </div></div>
         </div>
-        <button type="button" class="carousel-nav carousel-next" aria-label="Next advisors">›</button>
+        <button type="button" class="carousel-nav carousel-side-nav carousel-next" aria-label="Next advisors">›</button>
         <div class="carousel-dots" role="tablist" aria-label="Advisor slides"></div>
       </div>
       <div class="mt-8 text-center">
@@ -1252,7 +1309,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
         <a href="https://localsenioradvisor.com/tools/care-assessment" class="group relative block overflow-hidden rounded-2xl bg-gradient-to-br from-primary-700 via-primary-600 to-primary-800 text-white shadow-xl hover:shadow-2xl transition-shadow">
           <div class="relative z-10 px-7 py-9 sm:px-9 sm:py-10 flex flex-col h-full">
-            <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary-200">3 minutes · Free</div>
+            <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary-200"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>3 minutes · Free</div>
             <h3 class="mt-2 font-display text-2xl sm:text-3xl font-bold leading-tight">What level of care does your loved one need?</h3>
             <p class="mt-3 text-primary-100 text-base leading-relaxed flex-grow">A 10-question quiz tailored by senior-living advisors. Get a personalized care-level recommendation, a monthly budget for your zip code, and a shortlist of matching communities near you — instantly.</p>
             <span class="mt-6 inline-flex items-center px-5 py-3 rounded-lg bg-white text-primary-700 font-semibold text-sm shadow-md group-hover:bg-primary-50 transition-colors self-start">Take the Assessment <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg></span>
@@ -1260,7 +1317,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
         </a>
         <a href="https://localsenioradvisor.com/tools/cost-comparison" class="group relative block overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-700 via-emerald-600 to-teal-700 text-white shadow-xl hover:shadow-2xl transition-shadow">
           <div class="relative z-10 px-7 py-9 sm:px-9 sm:py-10 flex flex-col h-full">
-            <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-emerald-100">Free tools</div>
+            <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-emerald-200"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Real local pricing · Free</div>
             <h3 class="mt-2 font-display text-2xl sm:text-3xl font-bold leading-tight">How much does senior care cost?</h3>
             <p class="mt-3 text-emerald-50 text-base leading-relaxed flex-grow">Compare assisted living, memory care, independent living, nursing homes, and in-home care — calibrated to your zip code. See what's included, how it's paid, and what 10–20 years of care will cost.</p>
             <span class="mt-6 inline-flex items-center px-5 py-3 rounded-lg bg-white text-emerald-700 font-semibold text-sm shadow-md group-hover:bg-emerald-50 transition-colors self-start">Compare Costs <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg></span>
@@ -1287,11 +1344,6 @@ html, body { overflow-x: hidden; max-width: 100%; }
         <div class="bg-white rounded-xl p-6 shadow-xl text-gray-900">
           <h3 class="font-display font-semibold text-lg text-gray-900">Get Free Guidance</h3>
           <p class="text-sm text-gray-500 mb-4">Tell us what you're looking for and we'll help.</p>
-          <div class="lead-steps mb-4" aria-hidden="true">
-            <span class="lead-dot is-active" data-dot="1"></span>
-            <span class="lead-dot" data-dot="2"></span>
-            <span class="lead-dot" data-dot="3"></span>
-          </div>
           <form class="lead-form space-y-4" id="lead-form" novalidate>
             <div data-step="1">
               <h3 class="font-display font-semibold text-gray-900 mb-3">What type of care are you looking for?</h3>
@@ -1301,7 +1353,12 @@ html, body { overflow-x: hidden; max-width: 100%; }
                 <label class="care-option flex items-center gap-3 p-3 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary-300 transition-colors has-[:checked]:border-primary-500 has-[:checked]:bg-primary-50"><input type="radio" name="careNeeds" value="Independent Living" class="sr-only"><span class="text-sm font-medium text-gray-700">Independent Living</span></label>
                 <label class="care-option flex items-center gap-3 p-3 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary-300 transition-colors has-[:checked]:border-primary-500 has-[:checked]:bg-primary-50"><input type="radio" name="careNeeds" value="Not Sure" class="sr-only"><span class="text-sm font-medium text-gray-700">Not Sure</span></label>
               </div>
-              <button class="mt-4 w-full inline-flex items-center justify-center min-h-[48px] px-6 rounded-lg bg-primary-600 text-white font-semibold hover:bg-primary-700" type="button" data-next="2">Next</button>
+              <button class="mt-4 w-full inline-flex items-center justify-center min-h-[56px] px-6 rounded-lg bg-primary-600 text-white font-semibold hover:bg-primary-700 text-base" type="button" data-next="2">Next</button>
+              <div class="lead-steps mt-4" aria-hidden="true">
+                <span class="lead-dot is-active" data-dot="1"></span>
+                <span class="lead-dot" data-dot="2"></span>
+                <span class="lead-dot" data-dot="3"></span>
+              </div>
             </div>
             <div data-step="2" class="hidden">
               <h3 class="font-display font-semibold text-gray-900 mb-3">What's your timeline?</h3>
@@ -1313,8 +1370,13 @@ html, body { overflow-x: hidden; max-width: 100%; }
                 <label class="timeline-option flex items-center gap-3 p-3 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary-300 transition-colors has-[:checked]:border-primary-500 has-[:checked]:bg-primary-50"><input type="radio" name="timeline" value="researching" class="sr-only"><span class="text-sm font-medium text-gray-700">Just researching</span></label>
               </div>
               <div class="mt-4 grid grid-cols-2 gap-3">
-                <button class="inline-flex items-center justify-center min-h-[48px] px-6 rounded-lg border-2 border-gray-200 font-semibold text-gray-700" type="button" data-back="1">Back</button>
-                <button class="inline-flex items-center justify-center min-h-[48px] px-6 rounded-lg bg-primary-600 text-white font-semibold hover:bg-primary-700" type="button" data-next="3">Next</button>
+                <button class="inline-flex items-center justify-center min-h-[56px] px-6 rounded-lg border-2 border-gray-200 font-semibold text-gray-700" type="button" data-back="1">Back</button>
+                <button class="inline-flex items-center justify-center min-h-[56px] px-6 rounded-lg bg-primary-600 text-white font-semibold hover:bg-primary-700" type="button" data-next="3">Next</button>
+              </div>
+              <div class="lead-steps mt-4" aria-hidden="true">
+                <span class="lead-dot" data-dot="1"></span>
+                <span class="lead-dot is-active" data-dot="2"></span>
+                <span class="lead-dot" data-dot="3"></span>
               </div>
             </div>
             <div data-step="3" class="hidden space-y-3">
@@ -1326,8 +1388,13 @@ html, body { overflow-x: hidden; max-width: 100%; }
               <div><label class="block text-sm font-semibold mb-1" for="zip-lead">Zip Code *</label><input id="zip-lead" name="zip" inputmode="numeric" maxlength="5" class="w-full h-12 px-3 rounded-lg border-2 border-gray-200" autocomplete="postal-code"></div>
               <div><label class="block text-sm font-semibold mb-1" for="notes">Anything else? (optional)</label><input id="notes" name="notes" class="w-full h-12 px-3 rounded-lg border-2 border-gray-200"></div>
               <div class="grid grid-cols-2 gap-3 pt-1">
-                <button class="inline-flex items-center justify-center min-h-[48px] px-6 rounded-lg border-2 border-gray-200 font-semibold text-gray-700" type="button" data-back="2">Back</button>
-                <button class="inline-flex items-center justify-center min-h-[48px] px-6 rounded-lg bg-primary-600 text-white font-semibold hover:bg-primary-700" type="submit">Get Free Guidance</button>
+                <button class="inline-flex items-center justify-center min-h-[56px] px-6 rounded-lg border-2 border-gray-200 font-semibold text-gray-700" type="button" data-back="2">Back</button>
+                <button class="inline-flex items-center justify-center min-h-[56px] px-6 rounded-lg bg-primary-600 text-white font-semibold hover:bg-primary-700" type="submit">Get Free Guidance</button>
+              </div>
+              <div class="lead-steps mt-4" aria-hidden="true">
+                <span class="lead-dot" data-dot="1"></span>
+                <span class="lead-dot" data-dot="2"></span>
+                <span class="lead-dot is-active" data-dot="3"></span>
               </div>
             </div>
           </form>
@@ -1350,23 +1417,23 @@ html, body { overflow-x: hidden; max-width: 100%; }
           <span class="inline-flex items-center gap-1 text-base" role="img" aria-label="5 out of 5 stars"><span class="text-amber-400 tracking-tight">★★★★★</span></span>
           <p class="mt-3 text-sm text-gray-600 leading-relaxed flex-1">"Very helpful and accommodating. I would have had no idea which assisted living locations had a vacancy and took the Medicaid program my mom needed, but they knew right away."</p>
           <p class="mt-4 text-sm font-medium text-gray-900">Denise W.</p>
-          <p class="text-xs text-gray-500">Advisor: <a href="https://localsenioradvisor.com/agents/randy-chipman" class="text-primary-700 hover:text-primary-800 hover:underline">Randy Chipman</a></p>
+          <p class="text-xs text-gray-500">Advisor: <a href="https://localsenioradvisor.com/agents/randy-chipman" class="text-primary-600 hover:text-primary-700 hover:underline">Randy Chipman</a></p>
         </article>
         <article class="bg-white rounded-lg p-6 shadow-sm border border-gray-100 flex flex-col">
           <span class="inline-flex items-center gap-1 text-base" role="img" aria-label="5 out of 5 stars"><span class="text-amber-400 tracking-tight">★★★★★</span></span>
           <p class="mt-3 text-sm text-gray-600 leading-relaxed flex-1">"Lexie was so great! She was great at answering our questions and helping us navigate the different centers."</p>
           <p class="mt-4 text-sm font-medium text-gray-900">Miriam T.</p>
-          <p class="text-xs text-gray-500">Advisor: <a href="https://localsenioradvisor.com/agents/lexie-huff" class="text-primary-700 hover:text-primary-800 hover:underline">Lexie Huff</a></p>
+          <p class="text-xs text-gray-500">Advisor: <a href="https://localsenioradvisor.com/agents/lexie-huff" class="text-primary-600 hover:text-primary-700 hover:underline">Lexie Huff</a></p>
         </article>
         <article class="bg-white rounded-lg p-6 shadow-sm border border-gray-100 flex flex-col">
           <span class="inline-flex items-center gap-1 text-base" role="img" aria-label="5 out of 5 stars"><span class="text-amber-400 tracking-tight">★★★★★</span></span>
           <p class="mt-3 text-sm text-gray-600 leading-relaxed flex-1">"Lexie helped us tour facilities and answered our many questions. It was wonderful working with them. Zero pressure."</p>
           <p class="mt-4 text-sm font-medium text-gray-900">Brittany D.</p>
-          <p class="text-xs text-gray-500">Advisor: <a href="https://localsenioradvisor.com/agents/lexie-huff" class="text-primary-700 hover:text-primary-800 hover:underline">Lexie Huff</a></p>
+          <p class="text-xs text-gray-500">Advisor: <a href="https://localsenioradvisor.com/agents/lexie-huff" class="text-primary-600 hover:text-primary-700 hover:underline">Lexie Huff</a></p>
         </article>
       </div>
       <div class="mt-8 text-center">
-        <a href="https://localsenioradvisor.com/agents" class="inline-flex items-center font-semibold text-primary-700 hover:text-primary-800">See all advisors &amp; reviews <span aria-hidden="true" class="ml-1">→</span></a>
+        <a href="https://localsenioradvisor.com/agents" class="inline-flex items-center font-semibold text-primary-600 hover:text-primary-700">See all advisors &amp; reviews <span aria-hidden="true" class="ml-1">→</span></a>
       </div>
     </div>
   </section>
@@ -1495,8 +1562,10 @@ document.getElementById('reset-cb').addEventListener('click', function () {
     form.querySelectorAll('[data-step]').forEach(function (el) {
       el.classList.toggle('hidden', el.getAttribute('data-step') !== String(n));
     });
-    document.querySelectorAll('.lead-dot').forEach(function (dot) {
-      dot.classList.toggle('is-active', dot.getAttribute('data-dot') === String(n));
+    document.querySelectorAll('.lead-steps').forEach(function (row) {
+      row.querySelectorAll('.lead-dot').forEach(function (dot) {
+        dot.classList.toggle('is-active', dot.getAttribute('data-dot') === String(n));
+      });
     });
   }
   form.querySelectorAll('[data-next]').forEach(function (btn) {
@@ -1513,59 +1582,63 @@ document.getElementById('reset-cb').addEventListener('click', function () {
 })();
 
 (function () {
+  function visibleCount() {
+    if (window.innerWidth <= 768) return 1;
+    if (window.innerWidth <= 1024) return 2;
+    return 3;
+  }
   document.querySelectorAll('[data-carousel]').forEach(function (root) {
     var track = root.querySelector('.carousel-track');
     var dotsWrap = root.querySelector('.carousel-dots');
     if (!track) return;
     var cards = Array.prototype.slice.call(track.querySelectorAll('.carousel-card'));
-    function pageWidth() {
+    function stepWidth() {
       var card = cards[0];
       if (!card) return track.clientWidth;
-      var gap = 20;
+      var style = window.getComputedStyle(track);
+      var gap = parseFloat(style.columnGap || style.gap || '16') || 16;
       return card.getBoundingClientRect().width + gap;
     }
-    function pageCount() {
-      var visible = window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 640 ? 2 : 1);
-      return Math.max(1, Math.ceil(cards.length / visible));
+    function pages() {
+      return Math.max(1, Math.ceil(cards.length / visibleCount()));
+    }
+    function activePage() {
+      var w = stepWidth() * visibleCount();
+      if (!w) return 0;
+      return Math.round(track.scrollLeft / w);
     }
     function renderDots() {
       if (!dotsWrap) return;
-      var n = pageCount();
+      var n = pages();
+      var current = Math.min(activePage(), n - 1);
       dotsWrap.innerHTML = '';
       for (var i = 0; i < n; i++) {
-        var b = document.createElement('button');
-        b.type = 'button';
-        b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-        if (i === 0) b.classList.add('is-active');
-        b.addEventListener('click', function (idx) {
-          return function () { track.scrollTo({ left: idx * pageWidth() * (window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 640 ? 2 : 1)) / (window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 640 ? 2 : 1)) * (window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 640 ? 2 : 1)), behavior: 'smooth' }); };
-        }(i));
-        // simpler scroll by pages of visible cards:
         (function (idx) {
-          b.onclick = function () {
-            var visible = window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 640 ? 2 : 1);
-            var card = cards[0];
-            var gap = 20;
-            var w = card.getBoundingClientRect().width + gap;
-            track.scrollTo({ left: idx * visible * w, behavior: 'smooth' });
-            Array.prototype.forEach.call(dotsWrap.children, function (d, j) { d.classList.toggle('is-active', j === idx); });
-          };
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.setAttribute('aria-label', 'Go to slide ' + (idx + 1));
+          if (idx === current) b.classList.add('is-active');
+          b.addEventListener('click', function () {
+            track.scrollTo({ left: idx * visibleCount() * stepWidth(), behavior: 'smooth' });
+          });
+          dotsWrap.appendChild(b);
         })(i);
-        dotsWrap.appendChild(b);
       }
     }
-    root.querySelector('.carousel-prev')?.addEventListener('click', function () {
-      var visible = window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 640 ? 2 : 1);
-      var card = cards[0];
-      var w = card.getBoundingClientRect().width + 20;
-      track.scrollBy({ left: -visible * w, behavior: 'smooth' });
+    function scrollByPage(dir) {
+      track.scrollBy({ left: dir * visibleCount() * stepWidth(), behavior: 'smooth' });
+    }
+    root.querySelectorAll('.carousel-prev').forEach(function (btn) {
+      btn.addEventListener('click', function () { scrollByPage(-1); });
     });
-    root.querySelector('.carousel-next')?.addEventListener('click', function () {
-      var visible = window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 640 ? 2 : 1);
-      var card = cards[0];
-      var w = card.getBoundingClientRect().width + 20;
-      track.scrollBy({ left: visible * w, behavior: 'smooth' });
+    root.querySelectorAll('.carousel-next').forEach(function (btn) {
+      btn.addEventListener('click', function () { scrollByPage(1); });
     });
+    var t;
+    track.addEventListener('scroll', function () {
+      clearTimeout(t);
+      t = setTimeout(renderDots, 80);
+    }, { passive: true });
     renderDots();
     window.addEventListener('resize', renderDots);
   });
