@@ -700,6 +700,13 @@ address { margin: 8px 0 0; font-style: normal; font-size: 14px; line-height: 1.6
 }
 
 
+/* Labels on solid blue are always white (live.css utilities are layered and lose to the unlayered a{color:inherit}) */
+.btn-primary, .btn-primary:hover, .btn-primary:visited, .btn-primary:focus,
+.btn-call, .btn-call:hover, .btn-call:visited,
+a.bg-primary-600, a.bg-primary-700, button.bg-primary-600, button.bg-primary-700,
+.bg-primary-600.text-white, .hover\:bg-primary-700.text-white:hover { color: #fff; }
+.btn-view-all { gap: 0; }
+.btn-view-all svg { width: 16px; height: 16px; margin-left: 8px; flex: none; }
 html, body { overflow-x: hidden; max-width: 100%; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .care-option, .timeline-option { position: relative; }
@@ -1076,7 +1083,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
         <div class="carousel-dots" role="tablist" aria-label="Community slides"></div>
       </div>
       <div class="mt-8 text-center">
-        <a href="https://localsenioradvisor.com/communities" class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary-600 text-white font-semibold hover:bg-primary-700">View All Communities</a>
+        <a href="https://localsenioradvisor.com/communities" class="btn-primary btn-view-all">View All Communities<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path> </svg></a>
       </div>
     </div>
   </section>
@@ -1294,7 +1301,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
         <div class="carousel-dots" role="tablist" aria-label="Advisor slides"></div>
       </div>
       <div class="mt-8 text-center">
-        <a href="https://localsenioradvisor.com/agents" class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary-600 text-white font-semibold hover:bg-primary-700">View All Advisors</a>
+        <a href="https://localsenioradvisor.com/agents" class="btn-primary btn-view-all">View All Advisors<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path> </svg></a>
       </div>
     </div>
   </section>
