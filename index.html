@@ -659,7 +659,6 @@ address { margin: 8px 0 0; font-style: normal; font-size: 14px; line-height: 1.6
             Call (385) 200 2175
           </a>
           <a class="link-callback" href="#callback">Leave your number</a>
-          <p class="pending-note">Fallback pending Jonathan's decision.</p>
           <button class="reset" type="button" id="reset-cb">Try another zip</button>
         </div>
       </div>
@@ -766,6 +765,7 @@ address { margin: 8px 0 0; font-style: normal; font-size: 14px; line-height: 1.6
 // Randy covers all of Utah: any 5 digit zip starting with 84 (84000 to 84999).
 function isUtahZip(zip) { return /^84\d{3}$/.test(zip); }
 
+
 document.getElementById('menu-btn').addEventListener('click', function () {
   var menu = document.getElementById('mobile-menu');
   var open = menu.classList.toggle('open');
@@ -786,12 +786,26 @@ zipForm.addEventListener('submit', function (e) {
   zipErr.classList.add('hidden');
 
   if (isUtahZip(zip)) {
-    window.location.href = 'results.html?zip=' + encodeURIComponent(zip);
+    var notes = new URLSearchParams(window.location.search).get('notes');
+    var dest = 'results.html?zip=' + encodeURIComponent(zip);
+    if (notes === '1') dest += '&notes=1';
+    window.location.href = dest;
     return;
   }
 
   zipForm.classList.add('hidden');
   callbackFallback.classList.remove('hidden');
+  if (new URLSearchParams(window.location.search).get('notes') === '1') {
+    if (!document.getElementById('fallback-pending-note')) {
+      var note = document.createElement('p');
+      note.className = 'pending-note';
+      note.id = 'fallback-pending-note';
+      note.textContent = "Fallback pending Jonathan's decision.";
+      var leave = callbackFallback.querySelector('.link-callback');
+      if (leave && leave.nextSibling) callbackFallback.insertBefore(note, leave.nextSibling);
+      else callbackFallback.appendChild(note);
+    }
+  }
 });
 
 document.getElementById('reset-cb').addEventListener('click', function () {
