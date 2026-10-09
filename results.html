@@ -563,6 +563,47 @@ address { margin: 8px 0 0; font-style: normal; font-size: 14px; line-height: 1.6
   color: var(--color-gray-400);
 }
 
+/* Desktop and tablet: center the results column within the container like live's sections.
+   Mobile (768px and below) keeps the original left aligned layout. */
+@media (min-width: 769px) {
+  .results-heading { text-align: center; }
+  .results .advisor-card,
+  .results .out-of-area { margin-left: auto; margin-right: auto; }
+  .results > .link-callback,
+  .results > .reset,
+  .results > .pending-note {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  .results .communities-heading,
+  .results .communities-note { text-align: center; }
+  /* Card interiors stay left aligned so name, title and rating sit beside the photo. */
+  .results .advisor-card,
+  .results .out-of-area { text-align: left; }
+}
+/* Mobile: 44px minimum hit area on in-body text links without changing how they look. */
+@media (max-width: 768px) {
+  .results .link-callback,
+  .results .reset,
+  .results .link-profile,
+  .results .browse-link { position: relative; }
+  .results .link-callback::after,
+  .results .reset::after,
+  .results .link-profile::after,
+  .results .browse-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    min-height: 44px;
+    height: 100%;
+    transform: translateY(-50%);
+  }
+}
+
 @media (max-width: 1024px) {
   .footer-grid { grid-template-columns: 1fr 1fr 1fr; }
   .help-inner { grid-template-columns: 1fr; }

@@ -707,6 +707,31 @@ a.bg-primary-600, a.bg-primary-700, button.bg-primary-600, button.bg-primary-700
 .bg-primary-600.text-white, .hover\:bg-primary-700.text-white:hover { color: #fff; }
 .btn-view-all { gap: 0; }
 .btn-view-all svg { width: 16px; height: 16px; margin-left: 8px; flex: none; }
+/* Error line keeps its space so the hero does not jump when it appears. */
+.err { min-height: 1.5em; line-height: 1.5; }
+.err.is-hidden { visibility: hidden; }
+/* Mobile: 44px minimum hit area on in-body text links without changing how they look. */
+@media (max-width: 768px) {
+  .quiet a,
+  section a.text-primary-600,
+  #callback p a[href^="tel:"],
+  .link-callback,
+  .reset { position: relative; }
+  .quiet a::after,
+  section a.text-primary-600::after,
+  #callback p a[href^="tel:"]::after,
+  .link-callback::after,
+  .reset::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    min-height: 44px;
+    height: 100%;
+    transform: translateY(-50%);
+  }
+}
 html, body { overflow-x: hidden; max-width: 100%; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .care-option, .timeline-option { position: relative; }
@@ -932,14 +957,14 @@ html, body { overflow-x: hidden; max-width: 100%; }
     <div class="hero-inner">
       <h1>Find the right senior living for Mom or Dad. A local advisor helps you for free.</h1>
       <div class="zip-card">
-        <form id="zip-form">
+        <form id="zip-form" novalidate>
           <label for="zip">Talk to a local advisor</label>
           <div class="zip-row">
             <input id="zip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="Enter your zip code" required>
             <button class="btn-primary" type="submit">Get started</button>
           </div>
           <p class="fine">We will connect you with an advisor who covers your area.</p>
-          <p class="err hidden" id="zip-err">Enter a 5 digit zip code.</p>
+          <p class="err is-hidden" id="zip-err" role="alert" aria-live="polite">Enter a 5 digit zip code.</p>
         </form>
       </div>
       <p class="quiet">Or <a href="https://localsenioradvisor.com/communities">search by community</a></p>
@@ -1512,10 +1537,12 @@ zipForm.addEventListener('submit', function (e) {
   e.preventDefault();
   var zip = document.getElementById('zip').value.trim();
   if (!/^\d{5}$/.test(zip)) {
-    zipErr.classList.remove('hidden');
+    zipErr.classList.remove('is-hidden');
+    document.getElementById('zip').setAttribute('aria-invalid', 'true');
     return;
   }
-  zipErr.classList.add('hidden');
+  zipErr.classList.add('is-hidden');
+  document.getElementById('zip').removeAttribute('aria-invalid');
   var notes = new URLSearchParams(window.location.search).get('notes');
   var dest = 'results.html?zip=' + encodeURIComponent(zip);
   if (notes === '1') dest += '&notes=1';
