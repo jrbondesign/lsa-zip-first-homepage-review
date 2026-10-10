@@ -583,6 +583,10 @@ address { margin: 8px 0 0; font-style: normal; font-size: 14px; line-height: 1.6
   .results .advisor-card,
   .results .out-of-area { text-align: left; }
 }
+/* Mobile: space the call back and try another links 44px center to center so tap targets do not overlap. */
+@media (max-width: 768px) {
+  .results > .link-callback:not(.hidden) + .reset { margin-top: 23px; }
+}
 /* Mobile: 44px minimum hit area on in-body text links without changing how they look. */
 @media (max-width: 768px) {
   .results .link-callback,
