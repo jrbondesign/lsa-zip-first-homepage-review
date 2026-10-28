@@ -1,5 +1,6 @@
 /* Family flow prototype runtime (static preview only).
    - Links to pages outside this prototype show a short note instead of 404.
+   - Call buttons (tel: links) show a note instead of dialing.
    - Results page shows the ZIP the visitor typed.
    - Slim banner so nobody mistakes this for the live site. */
 (function () {
@@ -33,7 +34,14 @@
     var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
     if (!a) return;
     var href = a.getAttribute('href');
-    if (!href || href.charAt(0) === '#' || /^(tel|mailto|sms):/i.test(href)) return;
+    if (/^tel:/i.test(href || '')) {
+      // Calls are off in the prototype: say where the live site would call.
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      toast('On the live site this calls LSA at (385) 200-2175. Calls are off in this prototype.');
+      return;
+    }
+    if (!href || href.charAt(0) === '#' || /^(mailto|sms):/i.test(href)) return;
     if (outside(a.href)) {
       e.preventDefault();
       e.stopImmediatePropagation();
@@ -73,7 +81,7 @@
     var b = document.createElement('div');
     b.id = 'proto-banner';
     b.style.cssText = 'background:#fef3c7;color:#78350f;font:500 12.5px/1.35 Inter,system-ui,sans-serif;padding:6px 36px 6px 12px;text-align:center;position:relative';
-    b.innerHTML = 'Prototype with sample data. Not the live site. Forms and chat send nothing.<button type="button" aria-label="Hide note" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:none;font-size:18px;line-height:1;color:#78350f;cursor:pointer">&times;</button>';
+    b.innerHTML = 'Prototype with sample data. Not the live site. Calls, forms, and chat send nothing.<button type="button" aria-label="Hide note" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:none;font-size:18px;line-height:1;color:#78350f;cursor:pointer">&times;</button>';
     b.querySelector('button').addEventListener('click', function () {
       sessionStorage.setItem('protoBannerClosed', '1');
       b.remove();
