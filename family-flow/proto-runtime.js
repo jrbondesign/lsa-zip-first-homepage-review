@@ -49,6 +49,13 @@
     }
   }, true);
 
+  document.addEventListener('click', function (e) {
+    var v = e.target && e.target.closest ? e.target.closest('[data-proto-video]') : null;
+    if (!v) return;
+    e.preventDefault();
+    toast('On the live site this plays the video tour. Video is off in this prototype.');
+  }, true);
+
   document.addEventListener('submit', function (e) {
     var f = e.target;
     if (!f || f.tagName !== 'FORM') return;
