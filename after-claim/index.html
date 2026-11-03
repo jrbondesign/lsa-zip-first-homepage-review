@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>After claim flow: review preview</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+body{margin:0;background:#f6f7f9;color:#1f2937;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:32px 20px 56px}
+h1{font-size:26px;margin:0 0 8px}
+h2{font-size:18px;margin:32px 0 8px}
+p{margin:0 0 12px}
+ol,ul{padding-left:22px;margin:0 0 12px}
+li{margin:0 0 10px}
+a{color:#1f4fa3}
+.note{background:#fff7e6;border:1px solid #f0d9a8;border-radius:8px;padding:12px 14px;font-size:14px}
+small{color:#6b7280}
+</style>
+</head>
+<body>
+<main>
+<h1>After claim flow</h1>
+<p>Review preview of the footer "Claim your listing" link and what an owner sees after they claim. Every page here is a saved copy of the branch rendered with made up sample data: Maria Alvarez, Executive Director at Desert Willow Assisted Living in Mesa, AZ.</p>
+<p class="note">This is not live. There is no server behind these pages, so buttons that save, send or search the catalog do nothing. Nothing here can reach the real site or its data. The site header, footer and menu links that are not in this list go nowhere.</p>
+
+<h2>The owner's path</h2>
+<ol>
+<li><a href="signup-owner.html">Owner signup</a>, arriving from a listing with the community already known.</li>
+<li><a href="signup-owner-done.html">Check your email</a>. New copy says the link signs them in and takes them straight to claiming.</li>
+<li><a href="claim-open.html">After they confirm their email</a>. They are signed in and land on My Communities with the claim open and Desert Willow already picked. Claim This Community is the only solid blue button. The "Use [city]" suggestion that appears when a search matches a city is now an outline button (it needs a live search, so it shows in the screenshots, not here).</li>
+<li><a href="claim-received.html">Claim received</a>. The status row uses the new wording: "We're checking that you own or manage it. We'll email you when it's approved, usually within [reply time]." The call line stays.</li>
+<li><a href="emails/email-claim-received.html">Claim received email</a>. Same wording.</li>
+<li><a href="emails/email-claim-approved.html">Claim approved email</a> with one "Edit your listing" button into the editor. <a href="emails/email-claim-approved-new-password.html">Version for an owner who still needs a password</a>: the button goes through choosing a password, then opens the listing.</li>
+<li><a href="emails/email-claim-declined.html">Claim declined email</a>. No button.</li>
+<li><a href="editor-welcome.html?welcome=1">Editor, first visit after approval</a>. A one time welcome note at the top of the page, not sticky. The links in it jump to Photos, Description, Care types and Starting price. Dismiss hides it for good in this browser. Save stays the only solid blue button.</li>
+<li><a href="editor-in-review.html">Editor with an edit in review</a>. The banner names the fields in review and links the public page. Each of those fields shows an "In review" label.</li>
+<li><a href="emails/email-change-approved.html">Edit approved email</a>, now with a "View your public page" link.</li>
+</ol>
+
+<h2>Also covered</h2>
+<ul>
+<li><a href="claim-done.html">The /claim page done message</a> for someone who claims without an account. Same new wording.</li>
+</ul>
+
+<h2>Code only, not clickable here</h2>
+<ul>
+<li>Signing the owner in when they open the confirmation link, and carrying the community from signup to the claim.</li>
+<li>The approved email's link and the password step that opens the editor afterward.</li>
+<li>Owner accounts now report moderation correctly, and approved owners are marked as moderated.</li>
+<li>Typing in the claim search and filing a claim. Those need the server.</li>
+</ul>
+<p><small>[reply time] is a placeholder on purpose until the reply time is decided.</small></p>
+</main>
+</body>
+</html>
