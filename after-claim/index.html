@@ -1,57 +1,18 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
-<title>After claim flow: review preview</title>
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<style>
-body{margin:0;background:#f6f7f9;color:#1f2937;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-main{max-width:760px;margin:0 auto;padding:32px 20px 56px}
-h1{font-size:26px;margin:0 0 8px}
-h2{font-size:18px;margin:32px 0 8px}
-p{margin:0 0 12px}
-ol,ul{padding-left:22px;margin:0 0 12px}
-li{margin:0 0 10px}
-a{color:#1f4fa3}
-.note{background:#fff7e6;border:1px solid #f0d9a8;border-radius:8px;padding:12px 14px;font-size:14px}
-small{color:#6b7280}
-</style>
-</head>
-<body>
-<main>
-<h1>After claim flow</h1>
-<p>Review preview of the footer "Claim your listing" link and what an owner sees after they claim. Every page here is a saved copy of the branch rendered with made up sample data: Maria Alvarez, Executive Director at Desert Willow Assisted Living in Mesa, AZ.</p>
-<p class="note">This is not live. There is no server behind these pages, so buttons that save, send or search the catalog do nothing. Nothing here can reach the real site or its data. The site header, footer and menu links that are not in this list go nowhere.</p>
-
-<h2>The owner's path</h2>
-<ol>
-<li><a href="signup-owner.html">Owner signup</a>, arriving from a listing with the community already known.</li>
-<li><a href="signup-owner-done.html">Check your email</a>. New copy says the link signs them in and takes them straight to claiming.</li>
-<li><a href="claim-open.html">After they confirm their email</a>. They are signed in and land on My Communities with the claim open and Desert Willow already picked. Claim This Community is the only solid blue button. The "Use [city]" suggestion that appears when a search matches a city is now an outline button (it needs a live search, so it shows in the screenshots, not here).</li>
-<li><a href="claim-received.html">Claim received</a>. The status row uses the new wording: "We're checking that you own or manage it. We'll email you when it's approved, usually within [reply time]." The call line stays.</li>
-<li><a href="emails/email-claim-received.html">Claim received email</a>. Same wording.</li>
-<li><a href="emails/email-claim-approved.html">Claim approved email</a> with one "Edit your listing" button into the editor. <a href="emails/email-claim-approved-new-password.html">Version for an owner who still needs a password</a>: the button goes through choosing a password, then opens the listing.</li>
-<li><a href="emails/email-claim-declined.html">Claim declined email</a>. No button.</li>
-<li><a href="editor-welcome.html?welcome=1">Editor, first visit after approval</a>. A one time welcome note at the top of the page, not sticky. The links in it jump to Photos, Description, Care types and Starting price. Dismiss hides it for good in this browser. Save stays the only solid blue button.</li>
-<li><a href="editor-in-review.html">Editor with an edit in review</a>. The banner names the fields in review and links the public page. Each of those fields shows an "In review" label.</li>
-<li><a href="emails/email-change-approved.html">Edit approved email</a>, now with a "View your public page" link.</li>
-</ol>
-
-<h2>Also covered</h2>
-<ul>
-<li><a href="claim-done.html">The /claim page done message</a> for someone who claims without an account. Same new wording.</li>
-</ul>
-
-<h2>Code only, not clickable here</h2>
-<ul>
-<li>Signing the owner in when they open the confirmation link, and carrying the community from signup to the claim.</li>
-<li>The approved email's link and the password step that opens the editor afterward.</li>
-<li>Owner accounts now report moderation correctly, and approved owners are marked as moderated.</li>
-<li>Typing in the claim search and filing a claim. Those need the server.</li>
-</ul>
-<p><small>[reply time] is a placeholder on purpose until the reply time is decided.</small></p>
-</main>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Claim your listing: review</title></head>
+<body style="margin:0;background:#f8fafc;font:16px/1.55 system-ui,sans-serif;color:#111"><div style="max-width:1000px;margin:0 auto;padding:28px 20px">
+<p style="font-size:13px;color:#555;margin:0 0 6px">Review preview with sample data, not live. Draft pull request 478.</p>
+<p style="margin:0 0 18px"><span style="background:#c2410c;color:#fff;font-weight:800;padding:4px 10px;border-radius:5px">NEW</span> means changed in this PR. <span style="background:#334155;color:#fff;font-weight:800;padding:4px 10px;border-radius:5px">CURRENT STATE</span> means existing, unchanged.</p>
+<section style="background:#ffedd5;border:3px solid #c2410c;border-radius:10px;padding:20px;margin:0 0 30px">
+<h1 style="margin:0 0 8px;font-size:26px">Randy's ask: a Claim your listing link in the footer of the community page</h1>
+<p style="margin:0 0 12px">This is the one change that covers the ask. The footer on every community page now has For Communities, then Claim your listing, which opens the existing owner signup.</p>
+<img src="shots/01-community-footer-desktop.png" alt="Community page footer with Claim your listing" style="max-width:100%;border:1px solid #cbd5e1;border-radius:8px;background:#fff">
+<p style="margin:12px 0 0"><a href="step-01-footer.html" style="color:#1f4fa3;font-weight:600">Open the community page copy (Desert Willow Assisted Living, St. George)</a> and scroll to the footer. <a href="shots/01-community-footer-mobile.png" style="color:#1f4fa3">Phone view</a></p>
+<p style="margin:12px 0 0;font-size:14px;color:#333">Good to know: the link opens the general owner signup and does not carry which community the visitor was on. The community page already has its own Claim this listing link in the sidebar, which goes to the existing claim page for that community.</p>
+</section>
+<h2 style="margin:0 0 8px">Optional extras, keep or cut</h2>
+<p style="margin:0 0 8px;color:#333">Everything below rides along in the same PR. Each can stay or go without affecting the footer link.</p>
+<ul style="margin:0 0 30px 20px;padding:0"><li>Signup page intro wording (step 2)</li><li>Check your email wording (step 3)</li><li>Confirm link signs in and opens the claim (step 4)</li><li>Account overview button opens the claim search (step 5)</li><li>Claim form opens with the community picked (step 6)</li><li>Claim received wording and email (step 7)</li><li>Approval email with one Edit your listing button (step 9)</li><li>Welcome note in the editor after approval (step 10)</li><li>Clearer in review banner, save message and field labels (step 11)</li></ul>
+<h2 style="margin:0 0 8px">The full owner flow, in order</h2>
+<p style="margin:0 0 12px;color:#333">Walked end to end on a local copy of the site and Strapi with sample data. The admin approval step is the existing Strapi screen.</p>
+<ol style="list-style:none;margin:0;padding:0"><li style="margin:0 0 10px"><a href="step-01-footer.html" style="color:#1f4fa3;font-weight:600">Step 1: Community page footer: Claim your listing</a> <span style="background:#c2410c;color:#fff;font-weight:800;font-size:12px;padding:2px 8px;border-radius:4px;margin-left:6px">NEW</span><br><span style="color:#333">Changed in this PR: the site footer gets a For Communities heading with a Claim your listing link, and it shows on every page that uses the main layout, including each community page.</span></li><li style="margin:0 0 10px"><a href="step-02-signup.html" style="color:#1f4fa3;font-weight:600">Step 2: Owner signup page</a> <span style="background:#c2410c;color:#fff;font-weight:800;font-size:12px;padding:2px 8px;border-radius:4px;margin-left:6px">NEW</span><br><span style="color:#333">Changed in this PR: the existing owner signup page only gets small edits; it looks the same.</span></li><li style="margin:0 0 10px"><a href="step-03-check-email.html" style="color:#1f4fa3;font-weight:600">Step 3: Check your email</a> <span style="background:#c2410c;color:#fff;font-weight:800;font-size:12px;padding:2px 8px;border-radius:4px;margin-left:6px">NEW</span><br><span style="color:#333">Changed in this PR: the existing confirmation screen gets new wording.</span></li><li style="margin:0 0 10px"><a href="step-04-confirm.html" style="color:#1f4fa3;font-weight:600">Step 4: Confirm email, signed in</a> <span style="background:#c2410c;color:#fff;font-weight:800;font-size:12px;padding:2px 8px;border-radius:4px;margin-left:6px">NEW</span><br><span style="color:#333">Changed in this PR: today an owner who confirms sees Email confirmed with a Log In button; now the link signs them in and opens the claim.</span></li><li style="margin:0 0 10px"><a href="step-05-account.html" style="color:#1f4fa3;font-weight:600">Step 5: Account overview</a> <span style="background:#c2410c;color:#fff;font-weight:800;font-size:12px;padding:2px 8px;border-radius:4px;margin-left:6px">NEW</span><br><span style="color:#333">Changed in this PR: the screen looks the same; only where one button goes changed.</span></li><li style="margin:0 0 10px"><a href="step-06-claim.html" style="color:#1f4fa3;font-weight:600">Step 6: Claim form with the community picked</a> <span style="background:#c2410c;color:#fff;font-weight:800;font-size:12px;padding:2px 8px;border-radius:4px;margin-left:6px">NEW</span><br><span style="color:#333">Changed in this PR: the existing claim form opens on its own with the community already picked when signup carried one.</span></li><li style="margin:0 0 10px"><a href="step-07-claim-received.html" style="color:#1f4fa3;font-weight:600">Step 7: Claim received</a> <span style="background:#c2410c;color:#fff;font-weight:800;font-size:12px;padding:2px 8px;border-radius:4px;margin-left:6px">NEW</span><br><span style="color:#333">Changed in this PR: the existing Claim in review row gets clearer wording.</span></li><li style="margin:0 0 10px"><a href="step-08-admin.html" style="color:#1f4fa3;font-weight:600">Step 8: Admin approval in Strapi: Account Moderation, Claims tab</a> <span style="background:#334155;color:#fff;font-weight:800;font-size:12px;padding:2px 8px;border-radius:4px;margin-left:6px">CURRENT STATE</span><br><span style="color:#333">Existing, unchanged. The admin screen, the Mark contacted, Approve and Reject controls, and the required verification note all work as they do today.</span></li><li style="margin:0 0 10px"><a href="step-09-email.html" style="color:#1f4fa3;font-weight:600">Step 9: Approval email</a> <span style="background:#c2410c;color:#fff;font-weight:800;font-size:12px;padding:2px 8px;border-radius:4px;margin-left:6px">NEW</span><br><span style="color:#333">Changed in this PR: the existing approval email now has one Edit your listing button that opens the editor.</span></li><li style="margin:0 0 10px"><a href="step-10-editor-welcome.html" style="color:#1f4fa3;font-weight:600">Step 10: Editor with the welcome note</a> <span style="background:#c2410c;color:#fff;font-weight:800;font-size:12px;padding:2px 8px;border-radius:4px;margin-left:6px">NEW</span><br><span style="color:#333">Changed in this PR: the existing editor shows a one time welcome note after approval.</span></li><li style="margin:0 0 10px"><a href="step-11-in-review.html" style="color:#1f4fa3;font-weight:600">Step 11: An edit in review</a> <span style="background:#c2410c;color:#fff;font-weight:800;font-size:12px;padding:2px 8px;border-radius:4px;margin-left:6px">NEW</span><br><span style="color:#333">Changed in this PR: the existing Changes waiting for review banner and save message stay, with clearer copy and small labels.</span></li></ol>
+</div></body></html>
